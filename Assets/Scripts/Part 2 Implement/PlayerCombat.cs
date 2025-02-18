@@ -13,43 +13,13 @@ public class PlayerCombat : MonoBehaviour
     private bool IsDeflecting = false;
     private CapsuleCollider2D swordCollider;
 
-    public void Awake()
-    {
-        swordCollider = GetComponentInChildren<CapsuleCollider2D>();
-    }
-    void OnTriggerEnter2D(Collider2D other)
-    {
 
-        if(this.gameObject.tag == "Player" && other.gameObject.tag == "Enemy Attack")
-        {
-            if(IsDeflecting)
-            {
-                other.gameObject.transform.Rotate(0f, 0, 180.0f);
-                other.gameObject.tag = "Player Attack"; //flip the tag so it can damage enemies
-            }
-            else
-            {
-                Destroy(other.gameObject);
-                Destroy(this.gameObject);
-            }
-        }
-    }
     public void OnFire()
     {
-        if (projectilePrefab != null)
-        {
-            Instantiate(projectilePrefab,transform.position,transform.rotation);
-        }
+        //TODO: Implement player firing projectile 
     }
 
-    public void OnSlash()
-    {
-        if(!IsSlashing)
-        {
-            IsSlashing = true;
-            StartCoroutine(Swing(.25f));
-        }
-    }
+    //TODO: Implement OnSlash() event using Swing() coroutine
 
     public void OnDeflect()
     {
@@ -65,10 +35,10 @@ public class PlayerCombat : MonoBehaviour
         Quaternion targetRotation =  Quaternion.Euler ( new Vector3 ( 0.0f, 0.0f, 100f ) );
         while (elapsedTime < time) {
             print(elapsedTime);
-            elapsedTime += Time.deltaTime; // <- move elapsedTime increment here 
+            elapsedTime += Time.deltaTime;
             // Rotations
             sword.transform.localRotation = Quaternion.Lerp(startingRotation, targetRotation,  elapsedTime / time  );
-            yield return new WaitForEndOfFrame ();
+            yield return new WaitForEndOfFrame();
         }
         //reset everything back for next time
         sword.transform.localRotation = startingRotation;
@@ -78,10 +48,29 @@ public class PlayerCombat : MonoBehaviour
 
     private IEnumerator Deflect()
     {
-        IsDeflecting = true;
-        shield.SetActive(true);
-        yield return new WaitForSeconds(1f);
-        IsDeflecting = false;
-        shield.SetActive(false);
+        //TODO: Implement the Deflect function
+        yield break; //Remove this, was here to prevent errors
+    }
+
+    public void Awake()
+    {
+        swordCollider = GetComponentInChildren<CapsuleCollider2D>();
+    }
+    void OnTriggerEnter2D(Collider2D other)
+    {
+
+        if (this.gameObject.tag == "Player" && other.gameObject.tag == "Enemy Attack")
+        {
+            if (IsDeflecting)
+            {
+                other.gameObject.transform.Rotate(0f, 0, 180.0f);
+                other.gameObject.tag = "Player Attack"; //flip the tag so it can damage enemies
+            }
+            else
+            {
+                Destroy(other.gameObject);
+                Destroy(this.gameObject);
+            }
+        }
     }
 }
