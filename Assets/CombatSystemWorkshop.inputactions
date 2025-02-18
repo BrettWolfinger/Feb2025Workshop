@@ -33,15 +33,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Slash",
-                    "type": "Button",
-                    "id": "8684fa6a-8979-488d-9b0b-8263c8f892bb",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Deflect",
                     "type": "Button",
                     "id": "b1d298ff-2922-4ed8-bf46-44fdcf123687",
@@ -269,17 +260,6 @@
                     "processors": "",
                     "groups": "XR",
                     "action": "Fire",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "57a699a8-ddef-4049-8fd0-d8ceec675e3d",
-                    "path": "<Mouse>/rightButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "Slash",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
