@@ -81,16 +81,19 @@ public class PlayerCombat : MonoBehaviour
             if (IsDeflecting)
             {
                 other.gameObject.transform.Rotate(0f, 0, 180.0f);
-                other.gameObject.tag = "Player Attack"; //flip the tag so it can damage enemies
+                other.gameObject.tag = "Player Attack"; // flip the tag so it can damage enemies
             }
             else
             {
-                Destroy(other.gameObject);
+                Destroy(other.gameObject); // destroy the projectile
+                Destroy(this.gameObject); // destroy the player. Is this what we want here?
+                
+                /* 
+                * TODO: player should no longer unconditionally destroy themselves on collision
+                * TODO: player should take a damageToTake amount of damage
+                * TODO: player should only destroy itself when their health is <= 0
+                */ 
 
-                playerHealth.currentHealth -= 1;
-                if (playerHealth.currentHealth <= 0) {
-                    Destroy(gameObject);
-                }
             }
         }
     }
