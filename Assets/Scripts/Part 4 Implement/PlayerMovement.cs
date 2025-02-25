@@ -16,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+
         transform.Translate(movementValue.x*Time.deltaTime, movementValue.y*Time.deltaTime, 0);
         
         // Get mouse position in world space

@@ -12,14 +12,32 @@ public class PlayerCombat : MonoBehaviour
     private bool IsSlashing = false;
     private bool IsDeflecting = false;
     private CapsuleCollider2D swordCollider;
+    private float deflectTime = 0.5f;
+    
+    public int damageToTake = 1; // 👈 LOOK HERE 👈
+    private PlayerHealth playerHealth; // 👈 LOOK HERE 👈
 
-
+    void Awake() {
+        playerHealth = gameObject.GetComponent<PlayerHealth>(); // 👈 LOOK HERE 👈
+        
+        // you don't need to know this
+        swordCollider = GetComponentInChildren<CapsuleCollider2D>();
+    }
     public void OnFire()
     {
-        //TODO: Implement player firing projectile 
+        if (projectilePrefab == null) {
+            Debug.LogError("No projectile prefab!");
+        }
+        GameObject projectile = Instantiate(projectilePrefab, this.transform.position, this.transform.rotation);
     }
 
     //TODO: Implement OnSlash() event using Swing() coroutine
+    public void OnSwing() {
+        if(!IsSlashing) {
+            IsSlashing = true;
+            StartCoroutine(Swing(.25f));
+        }
+    }
 
     public void OnDeflect()
     {
@@ -48,13 +66,12 @@ public class PlayerCombat : MonoBehaviour
 
     private IEnumerator Deflect()
     {
-        //TODO: Implement the Deflect function
-        yield break; //Remove this, was here to prevent errors
-    }
+        IsDeflecting = true;
+        shield.SetActive(true);
 
-    public void Awake()
-    {
-        swordCollider = GetComponentInChildren<CapsuleCollider2D>();
+        yield return new WaitForSeconds(deflectTime);
+        IsDeflecting = false;
+        shield.SetActive(false);
     }
     void OnTriggerEnter2D(Collider2D other)
     {
@@ -69,7 +86,11 @@ public class PlayerCombat : MonoBehaviour
             else
             {
                 Destroy(other.gameObject);
-                Destroy(this.gameObject);
+
+                playerHealth.currentHealth -= 1;
+                if (playerHealth.currentHealth <= 0) {
+                    Destroy(gameObject);
+                }
             }
         }
     }

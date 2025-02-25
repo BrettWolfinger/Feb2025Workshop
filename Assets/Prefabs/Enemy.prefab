@@ -102,7 +102,7 @@ GameObject:
   - component: {fileID: 3065841153505964792}
   m_Layer: 0
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -275,3 +275,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectilePrefab: {fileID: 3943499107682362711, guid: 7335ff2c95d7797428d432336f717b4f, type: 3}
+  enemyFireRate: 1.5
