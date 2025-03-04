@@ -19,6 +19,7 @@ public class HealthUIText : MonoBehaviour
     void Update()
     {
         // TODO: update health text dynamically here
+        healthText.text = "Health: " + playerHealth.currentHealth + "/" + playerHealth.maxHealth;
     }
 
     public void ReferencePlayerHealth() {

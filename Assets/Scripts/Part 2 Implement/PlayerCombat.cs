@@ -85,15 +85,12 @@ public class PlayerCombat : MonoBehaviour
             }
             else
             {
-                Destroy(other.gameObject); // destroy the projectile
-                Destroy(this.gameObject); // destroy the player. Is this what we want here?
-                
-                /* 
-                * TODO: player should no longer unconditionally destroy themselves on collision
-                * TODO: player should take a damageToTake amount of damage
-                * TODO: player should only destroy itself when their health is <= 0
-                */ 
-
+                playerHealth.currentHealth -= damageToTake;
+                Destroy(other.gameObject);
+                if(playerHealth.currentHealth <= 0)
+                {
+                    Destroy(this.gameObject);
+                }
             }
         }
     }
