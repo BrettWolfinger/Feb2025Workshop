@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyCombat : MonoBehaviour
+public class EnemyCombatUpdated : MonoBehaviour
 {
     public GameObject projectilePrefab;
-    float timePassed = 0f;
     public float enemyFireRate = 2f;
+
+    public bool isOnCooldown = false;
     
 
 
@@ -19,13 +20,12 @@ public class EnemyCombat : MonoBehaviour
             
         }
     }
-    void Update()
+
+    public IEnumerator Fire()
     {
-       timePassed += Time.deltaTime;
-       if (timePassed > enemyFireRate)
-       {
-           Instantiate(projectilePrefab, transform.position, transform.rotation);
-           timePassed = 0f;
-       }
+        isOnCooldown = true;
+        Instantiate(projectilePrefab, transform.position, transform.rotation);
+        yield return new WaitForSeconds(enemyFireRate);
+        isOnCooldown = false;
     }
 }

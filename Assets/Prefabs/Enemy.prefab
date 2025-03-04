@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7030088414611567121}
   - component: {fileID: 6315335851301975552}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Direction
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -100,7 +100,9 @@ GameObject:
   - component: {fileID: 7049588550558664509}
   - component: {fileID: 8883446606248613262}
   - component: {fileID: 3065841153505964792}
-  m_Layer: 0
+  - component: {fileID: 2767979812315958021}
+  - component: {fileID: 5827087957328288939}
+  m_Layer: 7
   m_Name: Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -276,3 +278,41 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectilePrefab: {fileID: 3943499107682362711, guid: 7335ff2c95d7797428d432336f717b4f, type: 3}
   enemyFireRate: 1.5
+  isOnCooldown: 0
+--- !u!114 &2767979812315958021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9148135970949183244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fc9cda07d5115d47b13c5431ca20c66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentState: 0
+  rotationSpeed: 20
+  sightSensor: {fileID: 5827087957328288939}
+  enemyCombat: {fileID: 3065841153505964792}
+--- !u!114 &5827087957328288939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9148135970949183244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2eeb5a8d6ca3425499add35531ba77f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distance: 7
+  angle: 45
+  objectsLayers:
+    serializedVersion: 2
+    m_Bits: 64
+  obstaclesLayers:
+    serializedVersion: 2
+    m_Bits: 256
+  detectedObject: {fileID: 0}
