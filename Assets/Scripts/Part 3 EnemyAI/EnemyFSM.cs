@@ -18,12 +18,19 @@ public class EnemyFSM : MonoBehaviour
     void Update()
     {
         //TODO: Call the appropriate state action depending on the currentState
+        if (currentState == EnemyState.Scanning) {
+            Scanning();
+        } else if (currentState == EnemyState.AttackPlayer) {
+            AttackPlayer();
+        }
     }
 
     //turret passively rotating
     void Scanning()
     {
-        //TODO: Implement the state switch if a player is detected
+        if (sightSensor.detectedObject != null) {
+            currentState = EnemyState.AttackPlayer;
+        }
         
         if(transform.rotation.eulerAngles.z >= 270)
         {
@@ -42,7 +49,9 @@ public class EnemyFSM : MonoBehaviour
     //turret attacking player
     void AttackPlayer()
     {
-        //TODO: Implement the state switch if a player is no longer detected
+        if (sightSensor.detectedObject == null) {
+            currentState = EnemyState.Scanning;
+        }
 
         //turn to attack the player
         Vector3 directionToController = 
@@ -55,5 +64,9 @@ public class EnemyFSM : MonoBehaviour
         //TODO: Implement enemy firing.
         //Use the reference to the enemy combat script. We will have to refactor that script
         //It will help to use a coroutine!
+        if (!enemyCombat.isOnCooldown) {
+            StartCoroutine(enemyCombat.Fire());
+        }
+        
     }
 }

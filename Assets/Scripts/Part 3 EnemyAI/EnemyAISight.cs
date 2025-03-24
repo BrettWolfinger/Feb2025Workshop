@@ -16,7 +16,7 @@ public class EnemyAISight : MonoBehaviour
     void Update()
     {
         //TODO: Implement Physics2D.OverlapCircleAll
-        Collider2D[] colliders = null;
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(this.transform.position, radius, objectsLayers);
 
         detectedObject = null;
         for(int i=0;i<colliders.Length;i++)
@@ -28,7 +28,7 @@ public class EnemyAISight : MonoBehaviour
             if(angleToCollider < angle)
             {
                 //TODO: Implement Physics2D.Linecast to find if there is an obstacle between us
-                RaycastHit2D result = new RaycastHit2D();
+                RaycastHit2D result = Physics2D.Linecast(transform.position, collider.bounds.center, obstaclesLayers);
 
                 if(!result)
                 {
@@ -48,10 +48,10 @@ public class EnemyAISight : MonoBehaviour
     {
         Gizmos.DrawWireSphere(transform.position, radius);
 
-        // Gizmos.color = Color.red;
-        // Vector3 rightDirection = Quaternion.Euler(0,0,angle)*transform.up;
-        // Gizmos.DrawRay(transform.position,rightDirection*radius);
-        // Vector3 leftDirection = Quaternion.Euler(0,0,-angle)*transform.up;
-        // Gizmos.DrawRay(transform.position,leftDirection*radius);
+        Gizmos.color = Color.red;
+        Vector3 rightDirection = Quaternion.Euler(0,0,angle)*transform.up;
+        Gizmos.DrawRay(transform.position,rightDirection*radius);
+        Vector3 leftDirection = Quaternion.Euler(0,0,-angle)*transform.up;
+        Gizmos.DrawRay(transform.position,leftDirection*radius);
     }
 }
